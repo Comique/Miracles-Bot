@@ -28,6 +28,7 @@ client.on('message', msg => {
             var i = 0;
             var max = args[5]
             var list = new Array();
+            var waitlist = 0;
 
             msg.channel
                 .send({embed: { color: 0x000000, description: mess}})
@@ -37,6 +38,7 @@ client.on('message', msg => {
                         if (args._emoji.name === reactEmoji && !user.bot) {
                             if (i > max - 1)
                                 mess = mess + '\n__Waitlist:__'
+                                waitlist = 1;
                             else if (i == 0)
                                 mess = mess + '\n__Registered:__ '
                             if (!list.includes(user.username)) {
@@ -48,21 +50,6 @@ client.on('message', msg => {
                         }
                     });
                 });
-
-            /* msg.channel
-                .send(
-                    mess
-                )
-                .then((MessageReaction) => {
-                    MessageReaction.react(reactEmoji);
-                    MessageReaction.awaitReactions((args, user) => {
-                        return !user.bot && args._emoji.name === reactEmoji;
-                    }, { max: 1 }).then(reaction => {
-                        console.log('REACTION');
-                    });
-                });
-
-                */
 
         }
 
