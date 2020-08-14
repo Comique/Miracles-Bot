@@ -36,10 +36,10 @@ client.on('message', msg => {
                     messageReaction.react(reactEmoji);
                     messageReaction.awaitReactions((args, user) => {
                         if (args._emoji.name === reactEmoji && !user.bot) {
-                            if (i > max - 1 && !waitlist)
+                            if (i > max - 1 && !waitlist) {
                                 mess = mess + '\n__Waitlist:__'
                                 waitlist = 69;
-                            else if (i == 0)
+                            } else if (i == 0)
                                 mess = mess + '\n__Registered:__ '
                             if (!list.includes(user.username)) {
                                 list[i] = user.username
