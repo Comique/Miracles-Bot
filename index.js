@@ -20,6 +20,8 @@ client.on('message', msg => {
 
         if (args.length > 5) {
 
+            msg.delete();
+
             var boss = args[0].charAt(0).toUpperCase() + args[0].slice(1);
             var date = args[1];
             var time = args[2];
