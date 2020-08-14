@@ -20,13 +20,20 @@ client.on('message', msg => {
 
         if (args.length > 5) {
 
-            var mess = '<@' + msg.author + '> is carrying __**' + args[0].charAt(0).toUpperCase() + args[0].slice(1) + '**__ on __**' + args[1] + ' ' + args[2] + ' ' + args[3].toUpperCase() + ' (' + args[4].toUpperCase() + ')**__'
+            var boss = args[0].charAt(0).toUpperCase() + args[0].slice(1);
+            var date = args[1];
+            var time = args[2];
+            var ampm = args[3].toUpperCase();
+            var tz = args[4].toUpperCase();
+            var max = args[5];
+
+
+            var mess = '<@' + msg.author + '> is carrying __**' + boss + '**__ on __**' + date + ' ' + time + ' ' + ampm + ' (' + tz + ')**__'
                     + '\nThe party will be meeting at CH20 Root Abyss'
-                    + '\n__**' + args[5] + '**__ slots are available in the party.'
+                    + '\n__**' + max + '**__ slots are available in the party.'
                     + '\n**Reminder that we will be checking for contribution, please only react if you have the required amount.**'
                     + '\nReact to this message to reserve a spot.';
             var i = 0;
-            var max = args[5]
             var list = new Array();
             var waitlist = 0;
 
