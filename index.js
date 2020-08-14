@@ -70,4 +70,4 @@ client.on('message', msg => {
 
 });
 
-client.login('NzQzNTUwOTc4NjIzNzk5MzA4.XzWTzw.ad_U6_jeNyXsu4k9lTRJqTHUYyU');
+client.login(process.env.TOKEN);
