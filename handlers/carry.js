@@ -26,13 +26,13 @@ module.exports = {
             var users = new Array();
 
             msg.channel
-                .send({ embed: { color: "RANDOM", description: message } })
+                .send({ embed: { color: 0x81D8D0, description: message } })
                 .then((sentMessage) => {
                     sentMessage.react(reactEmoji);
                     sentMessage.awaitReactions((reaction, user) => {
                         if (reaction._emoji.name === reactEmoji && !user.bot) {
                             users.push(user);
-                            sentMessage.edit({ embed: { color: "RANDOM", description: updateList(message, users, max) } });
+                            sentMessage.edit({ embed: { color: 0x81D8D0, description: updateList(message, users, max) } });
                         }
                     });
                 });
