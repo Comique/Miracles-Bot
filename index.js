@@ -21,11 +21,10 @@ client.on('ready', () => {
 client.on('messageReactionRemove', async (reaction, user) => {
     if (user.bot) return;
     if (reaction.message.author.bot && reaction.emoji.name === '🤍') {
-        console.log(users);
         for (let i = 0; i < users.length; i++)
-            if (users[i] == user)
+            if (users[i] == user) {
                 users.splice(i, 1);
-        console.log(users);
+            }
         carry.updateList(users, reaction.message);
     }
 });
