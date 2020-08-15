@@ -32,7 +32,7 @@ module.exports = {
                     sentMessage.awaitReactions((reaction, user) => {
                         if (reaction._emoji.name === reactEmoji && !user.bot) {
                             users.push(user);
-                            sentMessage.edit({ embed: { description: updateList(message, users, max) } });
+                            sentMessage.edit({ embed: { color: "RANDOM", description: updateList(message, users, max) } });
                         }
                     });
                 });
