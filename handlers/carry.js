@@ -26,7 +26,7 @@ module.exports = {
             var users = new Array();
 
             msg.channel
-                .send({ embed: { color: 0x000000, description: message } })
+                .send({ embed: { color: "RANDOM", description: message } })
                 .then((sentMessage) => {
                     sentMessage.react(reactEmoji);
                     sentMessage.awaitReactions((reaction, user) => {
