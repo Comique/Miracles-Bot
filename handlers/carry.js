@@ -2,22 +2,25 @@ const Discord = require('discord.js');
 
 const reactEmoji = '🤍';
 
-var users = new Array();
 var max;
 var send;
+const msgUsersMap = {};
+const msgDateMap = {};
 
 module.exports = {
     name: 'carry',
     description: 'set up a carry post',
-    users: users,
     max: max,
+    msgUsersMap: msgUsersMap,
     send: send,
     updateList: updateList,
+    cleanMap: cleanMap,
     execute(msg, args) {
-
         msg.delete();
 
-        if (args.length > 5) {
+        var users = new Array();
+
+        if (args.length === 6) {
 
             var boss = args[0].charAt(0).toUpperCase() + args[0].slice(1);
             var date = args[1];
@@ -31,11 +34,15 @@ module.exports = {
                 + '\n__**' + max + '**__ slots are available in the party.'
                 + '\n**Reminder that we will be checking for contribution, please only react if you have the required amount.**'
                 + '\nReact to this message to reserve a spot.';
+                + '\n'
+                + '\nThis post will expire in 48 hours';
 
             msg.channel
                 .send({ embed: { color: 0x81D8D0, description: send } })
                 .then((sentMessage) => {
                     sentMessage.react(reactEmoji);
+                    msgUsersMap[sentMessage.id] = users;
+                    msgDateMap[sentMessage.id] = Date.now();
                     sentMessage.awaitReactions((reaction, user) => {
                         if (reaction._emoji.name === reactEmoji && !user.bot) {
                             users.push(user);
@@ -45,7 +52,6 @@ module.exports = {
                 });
 
         } else {
-
             msg.author.send({
                 embed: {
                     color: 0x81D8D0, description: "Invalid arguments."
@@ -61,13 +67,11 @@ function updateList(users, sentMessage) {
 
     let newMessage = send;
 
-    if (users.length <= max)
+    if (users.length <= max) 
         newMessage += "\nRegistered (" + users.length + "/" + max + "):";
-    else
+    else 
         newMessage += "\nRegistered (" + max + "/" + max + "):";
-
     for (let i = 1; i <= users.length; i++) {
-
         if (i - 1 == max)
             newMessage += "\nWaitlist: ";
 
@@ -77,4 +81,15 @@ function updateList(users, sentMessage) {
 
     sentMessage.edit({ embed: { color: 0x81D8D0, description: newMessage } });
 
+}
+
+function cleanMap() {
+    console.log("Cleaning");
+    for (var key in msgDateMap) {
+        var date = msgDateMap[key]
+        if ((date + (48*60*60*1000)) <= Date.now()) { //48 hr timer
+            delete msgDateMap[key];
+            delete msgUsersMap[key];
+        }
+    }
 }
