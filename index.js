@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const carry = require('./handlers/carry.js');
 const client = new Discord.Client();
 
-const prefix = '!';
+const prefix = ';';
 
 const fs = require('fs');
 const { msgUsersMap } = require('./handlers/carry');
